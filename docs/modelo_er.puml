@@ -1,0 +1,37 @@
+@startuml
+entity usuarios {
+  * id : INT <<PK, IDENTITY>>
+  --
+  * nombre : NVARCHAR(100)
+  * email : NVARCHAR(255) <<UNIQUE>>
+  * password_hash : NVARCHAR(255)
+  * creado_en : DATETIME2 <<DEFAULT SYSDATETIME()>>
+}
+entity productos {
+  * id : INT <<PK, IDENTITY>>
+  --
+  * nombre : NVARCHAR(150)
+  * precio : DECIMAL(10,2) <<CHECK >= 0>>
+  * stock : INT <<CHECK >= 0>>
+}
+entity ordenes {
+  * id : INT <<PK, IDENTITY>>
+  --
+  * usuario_id : INT <<FK>>
+  * fecha : DATETIME2 <<DEFAULT SYSDATETIME()>>
+}
+entity detalle_orden {
+  * orden_id : INT <<PK, FK>>
+  * producto_id : INT <<PK, FK>>
+  --
+  * cantidad : INT <<CHECK > 0>>
+  * precio_unitario : DECIMAL(10,2) <<CHECK >= 0>>
+}
+usuarios ||--o{ ordenes
+ordenes ||--o{ detalle_orden
+productos ||--o{ detalle_orden
+legend
+  * = NOT NULL. PK de detalle_orden: (orden_id, producto_id).
+  El esquema permite una orden sin detalles; crearOrden() exige al menos uno.
+endlegend
+@enduml

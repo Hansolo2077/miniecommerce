@@ -1,0 +1,42 @@
+@startuml
+class Usuario {
+  - conexion : PDO
+  + __construct(conexion : PDO)
+  + registrar(nombre : string, email : string, password : string) : bool
+  + obtenerPorId(id : int) : array?
+  + actualizarPerfil(id : int, nombre : string, email : string, password : string = "") : bool
+  - validarLongitudes(nombre : string, email : string, password : string) : void
+  - ejecutarEscritura(consulta : PDOStatement, parametros : array) : bool
+}
+class Producto {
+  - conexion : PDO
+  + __construct(conexion : PDO)
+  + listar(pagina : int = 1, porPagina : int = 5) : array
+  + obtenerPorId(id : int) : array?
+}
+class Orden {
+  - conexion : PDO
+  + __construct(conexion : PDO)
+  + calcularTotal(seleccion : array) : float
+  + crearOrden(usuarioId : int, seleccion : array) : int
+  - validarSeleccion(seleccion : array) : void
+}
+class DetalleOrden {
+  - productoId : int
+  - cantidad : int
+  - precioUnitario : float
+  + __construct(productoId : int, cantidad : int, precioUnitario : float)
+  + calcularSubtotal() : float
+  + obtenerProductoId() : int
+  + obtenerCantidad() : int
+  + obtenerPrecioUnitario() : float
+}
+Usuario --> PDO
+Producto --> PDO
+Orden --> PDO
+Orden ..> DetalleOrden : calcula subtotales
+note bottom
+  Usuario, Producto y Orden consultan tablas mediante PDO.
+  Sus registros se devuelven como arrays; las relaciones persistentes están en modelo_er.puml.
+end note
+@enduml

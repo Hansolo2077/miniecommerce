@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+actor Usuario
+
+rectangle "Mini Ecommerce UCN" {
+    usecase "Registrar usuario" as UC1
+    usecase "Consultar catálogo" as UC2
+    usecase "Calcular total de compra" as UC3
+    usecase "Actualizar perfil" as UC4
+}
+
+Usuario --> UC1
+Usuario --> UC2
+Usuario --> UC3
+Usuario --> UC4
+
+@enduml
