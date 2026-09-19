@@ -1,0 +1,35 @@
+-- Base de datos para Gestor de Libros
+-- Crear BD (ejecutar en MySQL/MariaDB)
+CREATE DATABASE IF NOT EXISTS gestor_libros CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE gestor_libros;
+
+-- Tabla libros
+CREATE TABLE IF NOT EXISTS libros (
+  id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID del libro',
+  titulo VARCHAR(255) NOT NULL COMMENT 'Título del libro',
+  autor VARCHAR(255) NOT NULL COMMENT 'Autor',
+  edicion INT NULL COMMENT 'Número de edición',
+  anio INT NULL COMMENT 'Año de publicación',
+  isbn VARCHAR(64) NULL COMMENT 'ISBN',
+  creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creación',
+  actualizado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de actualización'
+) ENGINE=InnoDB;
+
+-- Tabla categorías
+CREATE TABLE IF NOT EXISTS categorias (
+  id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID de categoría',
+  nombre VARCHAR(120) NOT NULL UNIQUE COMMENT 'Nombre de la categoría'
+) ENGINE=InnoDB;
+
+-- Relación N:M
+CREATE TABLE IF NOT EXISTS libro_categoria (
+  libro_id INT NOT NULL,
+  categoria_id INT NOT NULL,
+  PRIMARY KEY (libro_id, categoria_id),
+  CONSTRAINT fk_lc_libro FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE,
+  CONSTRAINT fk_lc_cat FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- Semillas opcionales
+INSERT IGNORE INTO categorias (nombre) VALUES
+('Novela'),('Ciencia Ficción'),('Fantasía'),('Tecnología'),('Programación'),('Historia'),('Educativo'),('Biografía'),('Empresarial'),('Autoayuda'),('Infantil');
