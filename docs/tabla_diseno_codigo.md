@@ -1,7 +1,7 @@
 # Diseño vs. Código
 
 Taller elegido: **A. Registrar usuario**. Los cuatro casos de uso del escenario se implementan.
-Los diagramas documentan el diseño del módulo revisado; no se recibió un UML externo del docente.
+Los diagramas describen los casos de uso, las clases y las relaciones de la base de datos del módulo.
 
 | Caso / artefacto | UI y controlador (URL relativa a localhost:8000) | Archivo, clase y método | ER / SQL | Prueba |
 |---|---|---|---|---|

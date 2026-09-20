@@ -1,15 +1,15 @@
 # Evidencias de pruebas
 
-## Revisión del 19/09/2026
+## Pruebas del 19/09/2026
 
 Se ejecutó `php tests/verificar.php` contra SQL Server real. Resultado: **16 comprobaciones
 correctas**, incluyendo tres flujos exitosos y el rechazo esperado de email duplicado.
 Salida completa: [verificacion_modelos.txt](verificacion_modelos.txt).
 Los datos de esta ejecución se revirtieron al terminar; los IDs de SQL Server pueden avanzar.
 
-Las cuatro capturas PNG se inspeccionaron durante la revisión. Las de P1, P3 y P4
-corresponden a la interfaz anterior a los ajustes de navegación. La captura de P2 fue
-renovada por el usuario y verificada visualmente: muestra el total esperado de C$470.00.
+Las cuatro capturas PNG muestran los resultados de las pruebas. Las de P1, P3 y P4
+corresponden a la interfaz anterior a los ajustes de navegación. La captura de P2
+muestra la interfaz actual y el total esperado de C$470.00.
 
 ## P1 — Registro exitoso (taller obligatorio A)
 
@@ -27,7 +27,7 @@ renovada por el usuario y verificada visualmente: muestra el total esperado de C
 - Esperado: 2 × 75 + 1 × 320 = **C$470.00**.
 - Obtenido: C$470.00 en prueba del modelo y en POST HTTP a `http://localhost:8000/carrito.php`.
 - Respuesta HTTP real guardada: [02_carrito_total_http.html](02_carrito_total_http.html).
-- Captura renovada y verificada: [02_carrito_total_exitoso.png](02_carrito_total_exitoso.png), con el mensaje «Total de la compra: C$470.00».
+- Captura: [02_carrito_total_exitoso.png](02_carrito_total_exitoso.png), con el mensaje «Total de la compra: C$470.00».
 - Los campos de cantidad vuelven a cero después del envío porque la vista reinicia el formulario. La captura evidencia el resultado; los datos de entrada y el cálculo se documentan arriba y se verifican en la prueba automatizada.
 
 ## P3 — Actualización de perfil exitosa
